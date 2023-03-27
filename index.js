@@ -18,15 +18,11 @@ const win=[
 let options=["","","","","","","","",""];
 let currentPlayer=x;
 let player="X";
-let running=false;
-init();
+let running=true;
 
-function init(){
-  boxs.forEach(box=>box.addEventListener('click',boxClick));
-  btnRestart.addEventListener('click',restartGame);
-  statusTxt.textContent=`${player} Your Turn`;
-  running=true;
-}
+boxs.forEach(box=>box.addEventListener('click',boxClick));
+btnRestart.addEventListener('click',restartGame);
+statusTxt.textContent=`${player} Your Turn`;
 
 function boxClick(){
   const index=this.dataset.index;
@@ -40,12 +36,6 @@ function boxClick(){
 function updateBox(box,index){
   options[index]=player;
   box.innerHTML=currentPlayer;
-}
-
-function changePlayer(){
-    player=(player=='X') ? "O" :"X";
-    currentPlayer=(currentPlayer==x) ? o :x;
-    statusTxt.textContent=`${player} Your Turn`;
 }
 
 function checkWinner(){
@@ -73,7 +63,9 @@ function checkWinner(){
     statusTxt.textContent=`Game Draw..!`;
     running=false;
   }else{
-    changePlayer();
+    player=(player=='X') ? "O" :"X";
+    currentPlayer=(currentPlayer==x) ? o :x;
+    statusTxt.textContent=`${player} Your Turn`;
   }
 
 }
